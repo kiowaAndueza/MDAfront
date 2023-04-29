@@ -1,0 +1,54 @@
+.container-company-form {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+.card {
+    border-color: #DADADA;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #F2F2F2;
+    border-color: #DADADA;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.company-title.card-header {
+    background-color: #13BDFD ;
+    color: #FFF;
+}
+
+
+.btn-companyRegister {
+    width: 100% !important;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 10px 0;
+    background-color: #13BDFD !important;
+    border-color: #13BDFD !important;
+    margin: 0;
+    margin-top: 2em;
+    padding: 0.8em !important;
+    font-size: 1.1em !important;
+}
+
+input:focus {
+    box-shadow: 0 0 5px #87CEEB !important;
+}
+
+.company-Text {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    text-align: justify;
+}
+  

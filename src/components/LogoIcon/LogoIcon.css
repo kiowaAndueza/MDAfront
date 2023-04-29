@@ -1,0 +1,22 @@
+.logo {
+    margin-left: 1.5em;
+}
+
+.logo-icon, .logo-text {
+    height: auto;
+    max-height: 5.2em;
+}
+
+@media only screen and (max-width: 767px) {
+    .logo-icon, .logo-text {
+        height: auto;
+        max-height: 2.2em;
+    }
+}
+  
+@media only screen and (max-width: 1024px) {
+    .logo-icon, .logo-text {
+        height: auto;
+        max-height: 3.2em;
+    }
+}

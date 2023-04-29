@@ -1,0 +1,76 @@
+.home-text {
+  background-color: white;
+}
+
+.img-petHome, .img-petPlay {
+  height: max-content;
+  width: max-content;
+  align-items: center;
+}
+
+.btn-home {
+  width: 100% !important;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #13BDFD !important;
+  border-color: #13BDFD !important;
+  margin: 0 !important;
+  padding: 0.9em !important;
+  color: white !important;
+  font-size: 0.9em !important;
+}
+
+@media only screen and (max-width: 991px) {
+  .home-text {
+    margin: 2em !important;
+  }
+
+  .img-petHome, .img-petPlay {
+    max-height: max-content;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .home-text {
+    margin: 4em !important;
+  }
+
+  .img-petHome, .img-petPlay {
+    align-items: center;
+  }
+
+  .img-petHome {
+    height: max-content;
+    max-width: max-content;
+  }
+
+  .img-petPlay {
+    height: max-content;
+    max-width: max-content;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .home-text {
+    margin: 3em !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .home-container {
+    padding: 0 !important;
+  }
+
+  .home-text {
+    margin: 2em !important;
+  }
+
+  .img-petHome, .img-petPlay {
+    height: max-content;
+    width: max-content;
+    align-items: center;
+  }
+}
