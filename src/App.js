@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import ParticularForm from './components/ParticularForm/ParticularForm';
 import CompanyForm from './components/CompanyForm/CompanyForm';
 import AdoptionForm from './components/AdoptionForm/AdoptionForm';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path='/' element={ <Navigate to="/home" /> }/>
+                    <Route path="*" element={<PageNotFound />} />
                     <Route exact path='/home' element={<Home />}></Route>
                     <Route exact path="/register" element={ <RegistrationSelection /> } />
                     <Route exact path="/register/particular" element={ <ParticularForm/> } />

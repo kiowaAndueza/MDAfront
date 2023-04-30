@@ -7,6 +7,7 @@ import { MaxCharactersConstraint } from "../../validator/MaxCharactersConstraint
 import { PasswordConstraint } from "../../validator/PasswordConstraint";
 import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
+import { particularRegister } from "../../services/Authentication";
 
 function ParticularForm() {
   const navigate = useNavigate();
@@ -95,6 +96,12 @@ function ParticularForm() {
           [name]: passwordConstraint.test(),
         });
         break;
+      case "confirmPassword":
+        setErrorMessages({
+          ...errorMessages,
+          [name]: "",
+        });
+        break;
       default:
         break;
     }
@@ -129,10 +136,15 @@ function ParticularForm() {
         "El formulario contiene errores"
       );
     } else {
-      console.log(formData);
-      successfulMessage("Se ha registrado correctamente").then(() => {
-        redirectToPath("/login");
-      });
+      try {
+        particularRegister(formData);
+        successfulMessage("Se ha registrado correctamente").then(() => {
+          redirectToPath("/login");
+        });
+        console.log(formData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -3,10 +3,10 @@ import "./LoginForm.css";
 import { Form, Button } from "react-bootstrap";
 import { FaRegUserCircle } from "react-icons/fa";
 import { EmailConstraint } from "../../validator/EmailConstraint";
-import { MinCharactersConstraint } from "../../validator/MinCharactersConstraint";
 import { Link } from "react-router-dom";
 import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../services/Authentication";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -31,15 +31,7 @@ function LoginForm() {
     if (name === "email") {
       const emailConstraint = new EmailConstraint(name, value);
       setEmailError(emailConstraint.test());
-    } else if (name === "password") {
-      const minCharactersConstraint = new MinCharactersConstraint(
-        "La contraseña",
-        value,
-        8
-      );
-      setPasswordError(minCharactersConstraint.test());
     }
-
     setFormData({
       ...formData,
       [name]: value,
@@ -55,20 +47,29 @@ function LoginForm() {
     } else {
       setEmailError("");
     }
-  
+
     if (formData.password === "") {
       setPasswordError("Esta campo no puede estar vacío");
     } else {
       setPasswordError("");
     }
 
-    if (!emailError && !passwordError && formData.email.trim() && formData.password.trim()) {
-      successfulMessage("Inicio de sesión exitoso").then(() => {
-        redirectToPath("/home");
-      });
+    if (
+      !emailError &&
+      !passwordError &&
+      formData.email.trim() &&
+      formData.password.trim()
+    ) {
+      try {
+        login(formData, "token");
+        successfulMessage("Inicio de sesión exitoso").then(() => {
+          redirectToPath("/home");
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
-  
 
   return (
     <div className="login-form-wrapper">

@@ -7,9 +7,9 @@ import { MaxCharactersConstraint } from "../../validator/MaxCharactersConstraint
 import { MinRangeNumberConstraint } from "../../validator/MinRangeNumberConstraint";
 import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
+import { createAdoptionAdvertisement } from "../../services/ApiServices";
 
 function AdoptionForm() {
-
   const navigate = useNavigate();
 
   const redirectToPath = (path) => {
@@ -132,14 +132,17 @@ function AdoptionForm() {
     }
 
     if (errorsForm) {
-      console.log(
-        "El formulario contiene errores"
-      );
+      console.log("El formulario contiene errores");
     } else {
-      console.log(formData);
-      successfulMessage("El anuncio se añadió correctamente").then(() => {
-        redirectToPath("/home");
-      });
+      try {
+        createAdoptionAdvertisement(formData);
+        successfulMessage("El anuncio se añadió correctamente").then(() => {
+          redirectToPath("/home");
+        });
+        console.log(formData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

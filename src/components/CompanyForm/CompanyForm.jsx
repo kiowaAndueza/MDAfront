@@ -11,9 +11,9 @@ import { PasswordConstraint } from "../../validator/PasswordConstraint";
 import { CPConstraint } from "../../validator/CPConstraint";
 import { useNavigate } from "react-router-dom";
 import { successfulMessage } from "../Messages/Messages";
+import { companyRegister } from "../../services/Authentication";
 
 function CompanyForm() {
-
   const navigate = useNavigate();
 
   const redirectToPath = (path) => {
@@ -142,8 +142,11 @@ function CompanyForm() {
           [name]: passwordConstraint.test(),
         });
         break;
-      case "city":
-        validateField("cp", formData.cp);
+      case "confirmPassword":
+        setErrorMessages({
+          ...errorMessages,
+          [name]: "",
+        });
         break;
       case "cp":
         const valueCP = parseInt(value);
@@ -180,7 +183,7 @@ function CompanyForm() {
       confirmPassword: "",
     });
 
-    if (formData.confirmPassword !== formData.password){
+    if (formData.confirmPassword !== formData.password) {
       setErrorMessages({
         ...errorMessages,
         confirmPassword: "Las contraseñas no coinciden",
@@ -195,14 +198,17 @@ function CompanyForm() {
     });
 
     if (errorsForm) {
-      console.log(
-        "El formulario contiene errores"
-      );
+      console.log("El formulario contiene errores");
     } else {
-      console.log(formData);
-      successfulMessage("Se ha registrado correctamente").then(() => {
-        redirectToPath("/login");
-      });
+      try {
+        companyRegister(formData);
+        successfulMessage("Se ha registrado correctamente").then(() => {
+          redirectToPath("/login");
+        });
+        console.log(formData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -219,8 +225,8 @@ function CompanyForm() {
                       ¡Regístrate ahora!
                     </h2>
                     <p className="mb-4">
-                      Como empresa/asociación, tendrás la posibilidad de
-                      buscar un hogar para nuestros amigos peludos o publicar un
+                      Como empresa/asociación, tendrás la posibilidad de buscar
+                      un hogar para nuestros amigos peludos o publicar un
                       anuncio si tu mascota ha desaparecido. Cada anuncio
                       contará con un foro en el que otros usuarios podrán
                       participar de alguna forma, ya sea para apoyarte en tu
