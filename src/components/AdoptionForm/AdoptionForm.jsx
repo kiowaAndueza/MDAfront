@@ -218,7 +218,7 @@ function AdoptionForm() {
             <option value="gato">Gato</option>
             <option value="pájaro">Pájaro</option>
             <option value="roedor">Roedor</option>
-            <option value="oto">Otro</option>
+            <option value="otro">Otro</option>
           </select>
           <div className="errorMessage">{errorMessages.animal}</div>
         </div>
