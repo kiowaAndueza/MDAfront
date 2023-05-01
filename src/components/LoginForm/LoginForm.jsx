@@ -7,9 +7,13 @@ import { Link } from "react-router-dom";
 import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/Authentication";
+import { containerLogger } from "../IsLogger/IsLogger";
+import { store } from "../Id/Id";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const [id, setId] = store.useState("id");
+  const [isLogger, setLogger] = containerLogger.useState("isLogger");
 
   const redirectToPath = (path) => {
     navigate(path);
@@ -38,7 +42,7 @@ function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
@@ -61,10 +65,23 @@ function LoginForm() {
       formData.password.trim()
     ) {
       try {
-        login(formData, "token");
-        successfulMessage("Inicio de sesión exitoso").then(() => {
-          redirectToPath("/home");
-        });
+        const response = await login(formData.email, formData.password);
+        if (response.status === 200) {
+          setId(response.data.id);
+          setLogger(true);
+          successfulMessage("Inicio de sesión exitoso").then(() => {
+            redirectToPath("/home");
+          });
+        } else {
+          console.log('El formulario contiene errores');
+        }
+        if (response.status === 200){
+          successfulMessage("Inicio de sesión exitoso").then(() => {
+            redirectToPath("/home");
+          });
+        } else {
+          console.log('El formulario contiene errores');
+        }
       } catch (error) {
         console.log(error);
       }

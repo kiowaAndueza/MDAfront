@@ -8,9 +8,13 @@ import { MinRangeNumberConstraint } from "../../validator/MinRangeNumberConstrai
 import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
 import { createAdoptionAdvertisement } from "../../services/ApiServices";
+import { ImageUrlConstraint } from "../../validator/ImageUrlConstraint";
+import { store } from "../Id/Id";
 
 function AdoptionForm() {
   const navigate = useNavigate();
+
+  const id = store.getState("id");
 
   const redirectToPath = (path) => {
     navigate(path);
@@ -23,7 +27,7 @@ function AdoptionForm() {
     gender: "",
     age: null,
     breed: "",
-    image: null,
+    image: "",
   });
 
   const [errorMessages, setErrorMessages] = useState({
@@ -32,6 +36,7 @@ function AdoptionForm() {
     age: "",
     animal: "",
     gender: "",
+    image: "",
   });
 
   const handleInputChange = (e) => {
@@ -93,19 +98,21 @@ function AdoptionForm() {
           });
         }
         break;
+      case "image":
+        if (value !== "" || value !== null) {
+          const imagenUrlConstraint = new ImageUrlConstraint(name, value);
+          setErrorMessages({
+            ...errorMessages,
+            [name]: imagenUrlConstraint.test(),
+          });
+        }
+        break;
       default:
         break;
     }
   };
 
-  const handleImageChange = (event) => {
-    setFormData({
-      ...formData,
-      image: event.target.files[0],
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setErrorMessages({
       ...errorMessages,
       animal: "",
@@ -135,11 +142,15 @@ function AdoptionForm() {
       console.log("El formulario contiene errores");
     } else {
       try {
-        createAdoptionAdvertisement(formData);
-        successfulMessage("El anuncio se añadió correctamente").then(() => {
-          redirectToPath("/home");
-        });
-        console.log(formData);
+        const response = await createAdoptionAdvertisement(formData, id);
+        if (response.status === 200) {
+          successfulMessage("El anuncio se añadió correctamente").then(() => {
+            redirectToPath("/home");
+          });
+          console.log(formData);
+        } else {
+          console.log('El formulario contiene errores');
+        }
       } catch (error) {
         console.log(error);
       }
@@ -268,14 +279,14 @@ function AdoptionForm() {
             Añadir foto:
           </label>
           <input
-            type="file"
-            className="form-control-file"
+            type="text"
+            className="form-control"
+            value={formData.image}
             id="image"
             name="image"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
+            onChange={handleInputChange}
           />
+          <div className="errorMessage">{errorMessages.image}</div>
           <span className="form-validation"></span>
         </div>
         <div className="adoption-form-group form-group">

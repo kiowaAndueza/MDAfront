@@ -107,7 +107,7 @@ function ParticularForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let errorsForm = false;
@@ -137,11 +137,14 @@ function ParticularForm() {
       );
     } else {
       try {
-        particularRegister(formData);
-        successfulMessage("Se ha registrado correctamente").then(() => {
-          redirectToPath("/login");
-        });
-        console.log(formData);
+        const response = await particularRegister(formData);
+        if (response.status === 200) {
+          successfulMessage("Se ha registrado correctamente").then(() => {
+            redirectToPath("/login");
+          });
+        } else {
+          console.log('El formulario contiene errores');
+        }
       } catch (error) {
         console.log(error);
       }
