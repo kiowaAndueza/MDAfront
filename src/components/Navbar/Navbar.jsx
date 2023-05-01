@@ -10,6 +10,7 @@ function Navbar() {
     setLogger(false);
     window.location.reload(false);
   };
+  
   if (isLogger) {
     return (
       <nav class="navbar navbar-expand-md navbar-light">

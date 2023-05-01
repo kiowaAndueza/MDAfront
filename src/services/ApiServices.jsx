@@ -1,15 +1,17 @@
 import axios from "axios";
 
-const domain = "";
+const domain = "http://localhost:8080";
 let request;
 let url;
 
-export const createAdoptionAdvertisement = (formData, id) => {
-  request = "";
+export const createAdoptionAdvertisement = (formData) => {
+  request = "/saveAnnounce";
   url = domain + request;
-  return axios.post(url, formData, {
+  const config = {
     headers: {
-      "headers": id,
+      "Content-Type": "application/json",
     },
-  });
+  };
+  const data = JSON.stringify(formData);
+  return axios.post(url, data, config);
 };
