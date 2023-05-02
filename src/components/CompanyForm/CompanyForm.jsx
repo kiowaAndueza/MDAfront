@@ -16,7 +16,7 @@ import { containerLogger } from "../IsLogger/IsLogger";
 
 function CompanyForm() {
   const navigate = useNavigate();
-  const [isLogger, setLogger] = containerLogger.useState("isLogger");
+  const [isLogger] = containerLogger.useState("isLogger");
 
   const redirectToPath = (path) => {
     navigate(path);
@@ -71,7 +71,7 @@ function CompanyForm() {
   useEffect(() => {
     fetchCharacters();
   }, []);
-  
+
   const handleInputChange = (e) => {
     const target = e.target;
     const value = target.value;

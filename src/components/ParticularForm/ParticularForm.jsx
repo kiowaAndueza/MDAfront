@@ -12,7 +12,7 @@ import { containerLogger } from "../IsLogger/IsLogger";
 
 function ParticularForm() {
   const navigate = useNavigate();
-  const [isLogger, setLogger] = containerLogger.useState("isLogger");
+  const [isLogger] = containerLogger.useState("isLogger");
 
   const redirectToPath = (path) => {
     navigate(path);

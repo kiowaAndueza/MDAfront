@@ -13,6 +13,7 @@ function LoginForm() {
   const navigate = useNavigate();
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
 
+
   const redirectToPath = (path) => {
     navigate(path);
   };
@@ -26,7 +27,7 @@ function LoginForm() {
   const [passwordError, setPasswordError] = useState("");
 
   const fetchCharacters = async () => {
-    if (isLogger) {
+    if (!isLogger) {
       redirectToPath("/home");
     }
   };
@@ -75,8 +76,8 @@ function LoginForm() {
       try {
         const response = await login(formData);
         if (response.status === 200) {
-          setLogger(true);
           successfulMessage("Inicio de sesión exitoso").then(() => {
+            setLogger(true);
             redirectToPath("/home");
           });
         } else {

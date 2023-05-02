@@ -11,7 +11,7 @@ function RegistrationSelection() {
     navigate(path);
   };
 
-  const [isLogger, setLogger] = containerLogger.useState("isLogger");
+  const [isLogger] = containerLogger.useState("isLogger");
 
   const fetchCharacters = async () => {
     if (isLogger) {
