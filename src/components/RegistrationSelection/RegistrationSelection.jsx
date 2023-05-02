@@ -13,11 +13,15 @@ function RegistrationSelection() {
 
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
 
-  useEffect(() => {
+  const fetchCharacters = async (IsLogger) => {
     if (isLogger) {
       redirectToPath("/home");
     }
-  }, [isLogger]);
+  };
+
+  useEffect(() => {
+    fetchCharacters(isLogger);
+  }, [setLogger]);
 
   return (
     <div className="registration-container">

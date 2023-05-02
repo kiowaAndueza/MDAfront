@@ -25,11 +25,15 @@ function LoginForm() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  useEffect(() => {
+  const fetchCharacters = async (IsLogger) => {
     if (isLogger) {
       redirectToPath("/home");
     }
-  }, [isLogger]);
+  };
+
+  useEffect(() => {
+    fetchCharacters(isLogger);
+  }, [setLogger]);
 
   const handleInputChange = (e) => {
     const target = e.target;

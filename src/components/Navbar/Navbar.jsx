@@ -42,7 +42,9 @@ function Navbar() {
                 Añadir adopción
               </a>
             </li>
-            <button onClick={handleLogout} className="border-0 p-3 mt-2" style={{ backgroundColor: "#0CC8A8" }}>Exit <i><BiExit /></i></button>
+            <li class="nav-item active">
+              <button onClick={handleLogout} className="nav-item active">Exit <i><BiExit /></i></button>
+            </li>
           </ul>
         </div>
       </nav>
