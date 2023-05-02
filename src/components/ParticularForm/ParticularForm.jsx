@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ParticularForm.css";
 import { useState } from "react";
 import { EmailConstraint } from "../../validator/EmailConstraint";
@@ -33,6 +33,12 @@ function ParticularForm() {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    if (isLogger) {
+      redirectToPath("/home");
+    }
+  }, [isLogger]);
 
   const handleInputChange = (e) => {
     const target = e.target;
@@ -153,8 +159,7 @@ function ParticularForm() {
     }
   };
 
-  if (!isLogger){
-    return (
+  return(
       <div className="container-particular-form container mt-5 mb-5">
         <div className="row d-flex justify-content-center align-items-center">
           <div class="col-md-6 mb-4">
@@ -294,9 +299,6 @@ function ParticularForm() {
         </div>
       </div>
     );
-  } else {
-    redirectToPath("/home"); 
-  }
 }
 
 export default ParticularForm;

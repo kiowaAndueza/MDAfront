@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LoginForm.css";
 import { Form, Button } from "react-bootstrap";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -24,6 +24,12 @@ function LoginForm() {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  useEffect(() => {
+    if (isLogger) {
+      redirectToPath("/home");
+    }
+  }, [isLogger]);
 
   const handleInputChange = (e) => {
     const target = e.target;
@@ -85,59 +91,52 @@ function LoginForm() {
     }
   };
 
-  if (!isLogger) {
-    return (
-      <div className="login-form-wrapper">
-        <Form onSubmit={handleSubmit} className="login-form">
-          <div className="title-container">
-            <div className="icon-container">
-              <FaRegUserCircle />
-            </div>
-            <h2>Iniciar sesión</h2>
+  return (
+    <div className="login-form-wrapper">
+      <Form onSubmit={handleSubmit} className="login-form">
+        <div className="title-container">
+          <div className="icon-container">
+            <FaRegUserCircle />
           </div>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Correo electrónico*:</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu correo electrónico"
-              className="form-control"
-            />
-            {emailError && <div className="errorMessage">{emailError}</div>}
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label className="mt-4">Contraseña*:</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu contraseña"
-              className="form-control"
-            />
-            {passwordError && (
-              <div className="errorMessage">{passwordError}</div>
-            )}
-          </Form.Group>
-          <div className="text-center mt-3">
-            ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+          <h2>Iniciar sesión</h2>
+        </div>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Correo electrónico*:</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Ingresa tu correo electrónico"
+            className="form-control"
+          />
+          {emailError && <div className="errorMessage">{emailError}</div>}
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label className="mt-4">Contraseña*:</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="Ingresa tu contraseña"
+            className="form-control"
+          />
+          {passwordError && <div className="errorMessage">{passwordError}</div>}
+        </Form.Group>
+        <div className="text-center mt-3">
+          ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+        </div>
+        <Button
+          type="submit"
+          className="mt-4 btn-company-form btn-block-container"
+        >
+          <div className="btn-block d-flex justify-content-center w-100">
+            Iniciar sesión
           </div>
-          <Button
-            type="submit"
-            className="mt-4 btn-company-form btn-block-container"
-          >
-            <div className="btn-block d-flex justify-content-center w-100">
-              Iniciar sesión
-            </div>
-          </Button>
-        </Form>
-      </div>
-    );
-  } else {
-    redirectToPath("/home");
-  }
-  
+        </Button>
+      </Form>
+    </div>
+  );
 }
 export default LoginForm;
