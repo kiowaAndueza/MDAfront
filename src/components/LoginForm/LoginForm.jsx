@@ -27,7 +27,7 @@ function LoginForm() {
   const [passwordError, setPasswordError] = useState("");
 
   const fetchCharacters = async () => {
-    if (!isLogger) {
+    if (isLogger) {
       redirectToPath("/home");
     }
   };
