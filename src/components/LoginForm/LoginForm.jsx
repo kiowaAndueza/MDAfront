@@ -135,7 +135,9 @@ function LoginForm() {
         </Form>
       </div>
     );
+  } else {
+    redirectToPath("/home");
   }
-  redirectToPath("/home");
+  
 }
 export default LoginForm;

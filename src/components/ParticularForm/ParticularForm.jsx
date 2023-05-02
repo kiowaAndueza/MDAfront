@@ -294,8 +294,9 @@ function ParticularForm() {
         </div>
       </div>
     );
+  } else {
+    redirectToPath("/home"); 
   }
-  redirectToPath("/home"); 
 }
 
 export default ParticularForm;

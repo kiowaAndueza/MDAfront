@@ -306,8 +306,10 @@ function AdoptionForm() {
         </form>
       </div>
     );
+  } else {
+    redirectToPath("/home");
   }
-  redirectToPath("/home");
+  
 }
 
 export default AdoptionForm;
