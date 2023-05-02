@@ -38,15 +38,16 @@ function AdoptionForm() {
     image: "",
   });
 
-  const fetchCharacters = async (IsLogger) => {
+
+  const fetchCharacters = async () => {
     if (!isLogger) {
       redirectToPath("/home");
     }
   };
 
   useEffect(() => {
-    fetchCharacters(isLogger);
-  }, [setLogger]);
+    fetchCharacters();
+  }, []);
 
   const handleInputChange = (e) => {
     const target = e.target;
