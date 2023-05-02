@@ -76,14 +76,7 @@ function LoginForm() {
       try {
         const response = await login(formData);
         if (response.status === 200) {
-          successfulMessage("Inicio de sesión exitoso").then(() => {
-            setLogger(true);
-            redirectToPath("/home");
-          });
-        } else {
-          console.log("El formulario contiene errores");
-        }
-        if (response.status === 200) {
+          setLogger(true);
           successfulMessage("Inicio de sesión exitoso").then(() => {
             redirectToPath("/home");
           });
