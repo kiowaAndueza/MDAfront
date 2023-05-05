@@ -2,7 +2,7 @@ import React from "react";
 import "../Navbar/Navbar.css";
 import LogoIcon from "../LogoIcon/LogoIcon";
 import { containerLogger } from "../IsLogger/IsLogger";
-import {BiExit} from "react-icons/bi";
+import { BiExit } from "react-icons/bi";
 
 function Navbar() {
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
@@ -10,7 +10,7 @@ function Navbar() {
     setLogger(false);
     window.location.reload(false);
   };
-  
+
   if (isLogger) {
     return (
       <nav class="navbar navbar-expand-md navbar-light">
@@ -42,8 +42,18 @@ function Navbar() {
                 Añadir adopción
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/MyAnnouncement">
+                Mis Anuncios
+              </a>
+            </li>
             <li class="nav-item active">
-              <button onClick={handleLogout} className="nav-item active">Exit <i><BiExit /></i></button>
+              <button onClick={handleLogout} className="nav-item active">
+                Exit{" "}
+                <i>
+                  <BiExit />
+                </i>
+              </button>
             </li>
           </ul>
         </div>
@@ -80,11 +90,6 @@ function Navbar() {
           <li class="nav-item">
             <a class="nav-link" href="/login">
               Iniciar sesión
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/MyAnnouncement">
-              Mis Anuncios
             </a>
           </li>
         </ul>
