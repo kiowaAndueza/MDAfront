@@ -15,3 +15,10 @@ export const createAdoptionAdvertisement = (formData) => {
   const data = JSON.stringify(formData);
   return axios.post(url, data, config);
 };
+
+
+export const showMyAnnouncements = (idUser) => {
+  request = "/findAnnounceByUser";
+  url = domain + request;
+  return axios.post(url, idUser);
+};

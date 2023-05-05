@@ -82,6 +82,11 @@ function Navbar() {
               Iniciar sesión
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/MyAnnouncement">
+              Mis Anuncios
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

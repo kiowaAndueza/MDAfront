@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "titulo": "Cachorro Golden Busca Familia",
+        "descripcion": "Tengo un cachorro Golden Retriever de 3 meses que necesita un hogar amoroso. Es muy juguetón y le encanta estar cerca de las personas. Está al día en sus vacunas y es muy saludable.",
+        "edad": 3,
+        "animal": "Perro",
+        "genero": "Macho",
+        "imagen": "https://cachorrospuppyworld.com/wp-content/uploads/2021/12/38BC277F-712A-4CAA-84DA-46C9A2D6442C-1.jpg"
+    },
+    {
+        "id": 2,
+        "titulo": "Gatita en Adopción",
+        "descripcion": "Esta pequeña gatita de 6 semanas está buscando su hogar para siempre. Es muy dulce y le encanta acurrucarse en los regazos. Está desparasitada y lista para su primera visita al veterinario.",
+        "edad": 6,
+        "animal": "Gato",
+        "genero": "Hembra",
+        "imagen": "https://imagenes.muyinteresante.es/files/vertical_composte_image/uploads/2022/10/12/6345f4ef5a5a4.jpeg"
+    },
+    {
+        "id": 3,
+        "titulo": "Cachorro Husky Siberiano Busca Familia",
+        "descripcion": "Tengo un cachorro Husky Siberiano de 2 meses disponible para la venta. Es un perro muy enérgico y necesita un dueño activo que pueda sacarlo a caminar y correr. Viene con sus vacunas al día y un certificado de salud.",
+        "edad": 2,
+        "animal": "Perro",
+        "genero": "Macho",
+        "imagen": "https://petstable.b-cdn.net/wp-content/uploads/2023/03/cachorro-husky-corriendo-sobre-grama.jpg"
+    }
+]

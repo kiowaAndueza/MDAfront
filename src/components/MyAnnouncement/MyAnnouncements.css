@@ -1,0 +1,30 @@
+.announcement-card {
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+.announcement-card-header {
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.my-announcement-container{
+  margin: 3em !important;
+}
+
+.announcement-card-body {
+  padding: 1rem;
+}
+
+.img-announcement {
+  height: 100% !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.button-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

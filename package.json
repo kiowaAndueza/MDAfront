@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,6 +47,8 @@
     ]
   },
   "devDependencies": {
-    "json-loader": "^0.5.7"
+    "concurrently": "^8.0.1",
+    "json-loader": "^0.5.7",
+    "json-server": "^0.17.3"
   }
 }

@@ -8,10 +8,12 @@ import { successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/Authentication";
 import { containerLogger } from "../IsLogger/IsLogger";
+import { store } from "../IdUser/IdUser";
 
 function LoginForm() {
   const navigate = useNavigate();
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
+  const [idUser, setIdUser] = store.useState("id");
 
 
   const redirectToPath = (path) => {
@@ -77,6 +79,8 @@ function LoginForm() {
         const response = await login(formData);
         if (response.status === 200) {
           setLogger(true);
+          setIdUser(response.data.id);
+          console.log(idUser)
           successfulMessage("Inicio de sesión exitoso").then(() => {
             redirectToPath("/home");
           });
