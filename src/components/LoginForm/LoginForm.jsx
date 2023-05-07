@@ -15,7 +15,6 @@ function LoginForm() {
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
   const [idUser, setIdUser] = store.useState("id");
 
-
   const redirectToPath = (path) => {
     navigate(path);
   };
@@ -80,7 +79,7 @@ function LoginForm() {
         if (response.status === 200) {
           setLogger(true);
           setIdUser(response.data.id);
-          console.log(idUser)
+          console.log(idUser);
           successfulMessage("Inicio de sesión exitoso").then(() => {
             redirectToPath("/home");
           });

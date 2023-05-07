@@ -38,12 +38,12 @@ function Navbar() {
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/advertisement/adoption">
+              <a class="nav-link" href="/announcement/adoption/createAdoption">
                 Añadir adopción
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/MyAnnouncement">
+              <a class="nav-link" href="/MyAnnouncements">
                 Mis Anuncios
               </a>
             </li>

@@ -22,3 +22,23 @@ export const showMyAnnouncements = (idUser) => {
   url = domain + request;
   return axios.post(url, idUser);
 };
+
+
+export const editMyAnnouncement = (formData, idAnnounce) => {
+  request = "/updateAnnounce";
+  url = domain + request;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const data = JSON.stringify(formData);
+  return axios.post(url, data, idAnnounce, config);
+};
+
+
+export const deleteMyAnnouncement = (idAnnouncer) => {
+  request = "/deleteAnnounce";
+  url = domain + request;
+  return axios.post(url, idAnnouncer);
+};

@@ -11,6 +11,7 @@ import CompanyForm from './components/CompanyForm/CompanyForm';
 import AdoptionForm from './components/AdoptionForm/AdoptionForm';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import MyAnnoucements from './components/MyAnnouncement/MyAnnouncements';
+import EditAdoptionForm from './components/EditAdoptionForm/EditAdoptionForm';
 
 function App() {
     return (
@@ -26,8 +27,10 @@ function App() {
                     <Route exact path="/register/particular" element={ <ParticularForm/> } />
                     <Route exact path="/register/company" element={ <CompanyForm /> } />
                     <Route exact path="/login" element={ <LoginForm /> } />
-                    <Route exact path="/advertisement/adoption" element={ <AdoptionForm /> } />
-                    <Route exact path="/myAnnouncement" element={ <MyAnnoucements /> } />
+                    <Route exact path="/announcement/adoption/createAdoption" element={ <AdoptionForm /> } />
+                    <Route exact path="/myAnnouncements" element={ <MyAnnoucements /> } />
+                    <Route exact path="/advertisement/adoption/editAnnoucement/:id" element={<EditAdoptionForm />} />
+
                 </Routes>
             </Router>
           </main>

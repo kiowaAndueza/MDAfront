@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Image, Button, ListGroup, Card } from "react-bootstrap";
-import announcementsJSON from "../../announcementsJSON.json";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import "./MyAnnouncements.css";
-import { showMyAnnouncements } from "../../services/ApiServices";
+import { deleteMyAnnouncement, showMyAnnouncements } from "../../services/ApiServices";
 import { store } from "../IdUser/IdUser";
-
+import { confirmationMessage, errorMessage, successfulMessage } from "../Messages/Messages";
+import { useNavigate } from "react-router-dom";
 
 function MyAnnoucements() {
-  const [announcements, setAnnouncements] = useState(announcementsJSON);
+  const [announcements, setAnnouncements] = useState();
   const [idUser] = store.useState("id");
+  const navigate = useNavigate();
+
+  /*const redirectToPath = (path) => {
+    navigate(path);
+  };*/
 
   useEffect(() => {
     showMyAnnouncements(idUser)
@@ -20,6 +25,28 @@ function MyAnnoucements() {
         console.log(error);
       });
   }, []);
+
+  const deleteAdoptionAnnouncement = async (
+    idAnnouncement,
+    nameAnnouncement
+  ) => {
+    const result = await confirmationMessage(
+      `¿Seguro que quieres eliminar el anuncio: "${nameAnnouncement}"?`
+    );
+    if (result.value) {
+      try {
+        await deleteMyAnnouncement(idAnnouncement);
+        successfulMessage("Se ha eliminado el anuncio correctamente.");
+      } catch (error) {
+        console.log(error);
+        errorMessage("Ha ocurrido un error al eliminar el anuncio.");
+      }
+    }
+  };
+
+  const editAdoptionAnnouncement = async (announcement) => {
+    navigate(`/advertisement/adoption/editAnnoucement/"${announcement.id}"`, { state: { announcement: announcement } });
+  };
 
   return (
     <div className="my-announcement-container mt-5 mb-5">
@@ -59,10 +86,21 @@ function MyAnnoucements() {
                         <strong>Género:</strong> {announcement.gender}
                       </p>
                       <div className="button-container">
-                        <Button variant="danger">
+                        <Button
+                          variant="danger"
+                          onClick={() =>
+                            deleteAdoptionAnnouncement(
+                              announcement.id,
+                              announcement.name
+                            )
+                          }
+                        >
                           <AiFillDelete />
                         </Button>
-                        <Button variant="info">
+                        <Button
+                          variant="info"
+                          onClick={() => editAdoptionAnnouncement(announcement)}
+                        >
                           <AiFillEdit />
                         </Button>
                       </div>
