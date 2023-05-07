@@ -45,7 +45,7 @@ function MyAnnoucements() {
   };
 
   const editAdoptionAnnouncement = async (announcement) => {
-    navigate(`/advertisement/adoption/editAnnoucement/"${announcement.id}"`, { state: { announcement: announcement } });
+    navigate(`/announcement/adoption/editAnnoucement/"${announcement.id}"`, { state: { announcement: announcement } });
   };
 
   return (

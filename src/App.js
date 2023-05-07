@@ -29,7 +29,7 @@ function App() {
                     <Route exact path="/login" element={ <LoginForm /> } />
                     <Route exact path="/announcement/adoption/createAdoption" element={ <AdoptionForm /> } />
                     <Route exact path="/myAnnouncements" element={ <MyAnnoucements /> } />
-                    <Route exact path="/advertisement/adoption/editAnnoucement/:id" element={<EditAdoptionForm />} />
+                    <Route exact path="/announcement/adoption/editAnnoucement/:id" element={<EditAdoptionForm />} />
 
                 </Routes>
             </Router>
