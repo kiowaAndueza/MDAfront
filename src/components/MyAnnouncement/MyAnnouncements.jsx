@@ -8,7 +8,7 @@ import { confirmationMessage, errorMessage, successfulMessage } from "../Message
 import { useNavigate } from "react-router-dom";
 
 function MyAnnoucements() {
-  const [announcements, setAnnouncements] = useState();
+  const [announcements, setAnnouncements] = useState([]);
   const [idUser] = store.useState("id");
   const navigate = useNavigate();
 
