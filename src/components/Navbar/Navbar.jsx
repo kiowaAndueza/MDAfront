@@ -6,6 +6,7 @@ import { BiExit } from "react-icons/bi";
 
 function Navbar() {
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
+
   const handleLogout = async () => {
     setLogger(false);
     window.location.reload(false);
@@ -43,7 +44,7 @@ function Navbar() {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/MyAnnouncements">
+              <a class="nav-link" href="/myAnnouncements">
                 Mis Anuncios
               </a>
             </li>

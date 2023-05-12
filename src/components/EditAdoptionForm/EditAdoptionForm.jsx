@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { editMyAnnouncement } from "../../services/ApiServices";
 import { MinCharactersConstraint } from "../../validator/MinCharactersConstraint";
 import { MaxCharactersConstraint } from "../../validator/MaxCharactersConstraint";
@@ -14,9 +14,9 @@ function EditAdoptionForm(props) {
   const navigate = useNavigate();
   const [isLogger] = containerLogger.useState("isLogger");
 
-  const redirectToPath = (path) => {
+  const redirectToPath = useCallback((path) => {
     navigate(path);
-  };
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     title: props.title || "",
@@ -38,16 +38,16 @@ function EditAdoptionForm(props) {
     image: "",
   });
 
-  const fetchCharacters = async () => {
-    if (isLogger) {
-      console.log(isLogger);
-      redirectToPath("/home");
-    }
-  };
-
   useEffect(() => {
+    const fetchCharacters = async () => {
+      if (!isLogger) {
+        redirectToPath("/home");
+      }
+    };
+  
     fetchCharacters();
-  }, []);
+  }, [isLogger, redirectToPath]);
+  
 
   const handleInputChange = (e) => {
     const target = e.target;
@@ -152,7 +152,7 @@ function EditAdoptionForm(props) {
       console.log("El formulario contiene errores");
     } else {
       try {
-        const response = await editMyAnnouncement(formData, props.id);
+        const response = await editMyAnnouncement(props.id, formData);
         if (response.status === 200) {
           successfulMessage("El anuncio se modificó correctamente").then(() => {
             redirectToPath("/home");

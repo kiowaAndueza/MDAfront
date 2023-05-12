@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import "./AdoptionForm.css";
 import { MdPets } from "react-icons/md";
@@ -10,14 +10,16 @@ import { useNavigate } from "react-router-dom";
 import { createAdoptionAdvertisement } from "../../services/ApiServices";
 import { ImageUrlConstraint } from "../../validator/ImageUrlConstraint";
 import { containerLogger } from "../IsLogger/IsLogger";
+import { store } from "../IdUser/IdUser";
 
 function AdoptionForm() {
   const navigate = useNavigate();
   const [isLogger] = containerLogger.useState("isLogger");
+  const [idUser] = store.useState("id");
 
-  const redirectToPath = (path) => {
+  const redirectToPath = useCallback((path) => {
     navigate(path);
-  };
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -38,16 +40,15 @@ function AdoptionForm() {
     image: "",
   });
 
-  const fetchCharacters = async () => {
-    if (isLogger) {
-      console.log(isLogger);
-      redirectToPath("/home");
-    }
-  };
-
   useEffect(() => {
+    const fetchCharacters = async () => {
+      if (!isLogger) {
+        redirectToPath("/home");
+      }
+    };
+  
     fetchCharacters();
-  }, []);
+  }, [isLogger, redirectToPath]);
 
   const handleInputChange = (e) => {
     const target = e.target;
@@ -152,7 +153,7 @@ function AdoptionForm() {
       console.log("El formulario contiene errores");
     } else {
       try {
-        const response = await createAdoptionAdvertisement(formData);
+        const response = await createAdoptionAdvertisement(formData, idUser);
         if (response.status === 200) {
           successfulMessage("El anuncio se añadió correctamente").then(() => {
             redirectToPath("/home");

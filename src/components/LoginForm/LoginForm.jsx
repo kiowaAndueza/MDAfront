@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./LoginForm.css";
 import { Form, Button } from "react-bootstrap";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -15,9 +15,9 @@ function LoginForm() {
   const [isLogger, setLogger] = containerLogger.useState("isLogger");
   const [idUser, setIdUser] = store.useState("id");
 
-  const redirectToPath = (path) => {
+  const redirectToPath = useCallback((path) => {
     navigate(path);
-  };
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -27,15 +27,16 @@ function LoginForm() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const fetchCharacters = async () => {
-    if (isLogger) {
-      redirectToPath("/home");
-    }
-  };
-
   useEffect(() => {
+    const fetchCharacters = async () => {
+      if (isLogger) {
+        redirectToPath("/home");
+      }
+    };
+  
     fetchCharacters();
-  }, []);
+  }, [isLogger, redirectToPath]);
+  
 
   const handleInputChange = (e) => {
     const target = e.target;

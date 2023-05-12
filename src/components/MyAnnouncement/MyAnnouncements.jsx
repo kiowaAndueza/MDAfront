@@ -6,25 +6,34 @@ import { deleteMyAnnouncement, showMyAnnouncements } from "../../services/ApiSer
 import { store } from "../IdUser/IdUser";
 import { confirmationMessage, errorMessage, successfulMessage } from "../Messages/Messages";
 import { useNavigate } from "react-router-dom";
+import { containerLogger } from "../IsLogger/IsLogger";
 
 function MyAnnoucements() {
   const [announcements, setAnnouncements] = useState([]);
   const [idUser] = store.useState("id");
   const navigate = useNavigate();
-
-  /*const redirectToPath = (path) => {
-    navigate(path);
-  };*/
+  const [isLogger] = containerLogger.useState("isLogger");
 
   useEffect(() => {
-    showMyAnnouncements(idUser)
-      .then((response) => {
-        setAnnouncements(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    const redirectToPath = (path) => {
+      navigate(path);
+    };
+
+    const fetchCharacters = async () => {
+      if (!isLogger) {
+        redirectToPath("/home");
+      } else {
+        try {
+          const response = await showMyAnnouncements(idUser);
+          setAnnouncements(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+
+    fetchCharacters();
+  }, [isLogger, navigate, idUser, setAnnouncements]);
 
   const deleteAdoptionAnnouncement = async (
     idAnnouncement,
@@ -45,7 +54,9 @@ function MyAnnoucements() {
   };
 
   const editAdoptionAnnouncement = async (announcement) => {
-    navigate(`/announcement/adoption/editAnnoucement/"${announcement.id}"`, { state: { announcement: announcement } });
+    navigate(`/announcement/adoption/editAnnoucement/"${announcement.id}"`, {
+      state: { announcement: announcement },
+    });
   };
 
   return (

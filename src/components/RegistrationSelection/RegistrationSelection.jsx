@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./RegistrationSelection.css";
 import { containerLogger } from "../IsLogger/IsLogger";
@@ -7,21 +7,22 @@ import { useNavigate } from "react-router-dom";
 function RegistrationSelection() {
   const navigate = useNavigate();
 
-  const redirectToPath = (path) => {
+  const redirectToPath = useCallback((path) => {
     navigate(path);
-  };
+  }, [navigate]);
 
   const [isLogger] = containerLogger.useState("isLogger");
 
-  const fetchCharacters = async () => {
-    if (isLogger) {
-      redirectToPath("/home");
-    }
-  };
-
   useEffect(() => {
+    const fetchCharacters = async () => {
+      if (isLogger) {
+        redirectToPath("/home");
+      }
+    };
+  
     fetchCharacters();
-  }, []);
+  }, [isLogger, redirectToPath]);
+  
 
   return (
     <div className="registration-container">

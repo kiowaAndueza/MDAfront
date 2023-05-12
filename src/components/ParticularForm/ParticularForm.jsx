@@ -34,15 +34,20 @@ function ParticularForm() {
     confirmPassword: "",
   });
 
-  const fetchCharacters = async () => {
-    if (isLogger) {
-      redirectToPath("/home");
-    }
-  };
-
   useEffect(() => {
+    const redirectToPath = (path) => {
+      navigate(path);
+    };
+
+    const fetchCharacters = async () => {
+      if (isLogger) {
+        redirectToPath("/home");
+      }
+    };
+  
     fetchCharacters();
-  }, []);
+  }, [isLogger, navigate]);
+  
 
   const handleInputChange = (e) => {
     const target = e.target;

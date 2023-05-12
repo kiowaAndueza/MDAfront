@@ -4,7 +4,7 @@ const domain = "http://localhost:8080";
 let request;
 let url;
 
-export const createAdoptionAdvertisement = (formData) => {
+export const createAdoptionAdvertisement = (formData, idUser) => {
   request = "/saveAnnounce";
   url = domain + request;
   const config = {
@@ -13,7 +13,7 @@ export const createAdoptionAdvertisement = (formData) => {
     },
   };
   const data = JSON.stringify(formData);
-  return axios.post(url, data, config);
+  return axios.post(url, data, idUser, config);
 };
 
 
@@ -24,7 +24,7 @@ export const showMyAnnouncements = (idUser) => {
 };
 
 
-export const editMyAnnouncement = (formData, idAnnounce) => {
+export const editMyAnnouncement = (idAnnounce, formData) => {
   request = "/updateAnnounce";
   url = domain + request;
   const config = {
